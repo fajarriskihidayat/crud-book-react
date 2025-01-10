@@ -4,10 +4,14 @@ import Layout from "../components/Layout";
 import Table from "../components/Table";
 import { IBook } from "../types";
 import isLocation from "../utils/isLocation";
+import Pagination from "../components/Pagination";
 
 const Book = () => {
   const navigate = useNavigate();
   const [books, setBooks] = useState<IBook[]>();
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemPerPage = 2;
 
   useEffect(() => {
     const booksStorage = localStorage.getItem("books");
@@ -15,6 +19,10 @@ const Book = () => {
 
     setBooks(datas);
   }, []);
+
+  const lastIndex = currentPage * itemPerPage;
+  const firstIndex = lastIndex - itemPerPage;
+  const currentItems = books?.slice(firstIndex, lastIndex);
 
   return (
     <Layout>
@@ -30,9 +38,26 @@ const Book = () => {
             </button>
           </div>
 
-          <div className="w-full h-full bg-neutral-100 p-6 rounded-lg shadow-lg flex flex-col gap-y-5">
+          <div className="relative w-full h-[400px] bg-neutral-100 p-6 rounded-lg shadow-lg flex flex-col gap-y-5">
             <div className="overflow-auto">
-              {books && <Table datas={books} setBooks={setBooks} />}
+              {books && (
+                <Table
+                  datas={books}
+                  currentItems={currentItems}
+                  setBooks={setBooks}
+                />
+              )}
+            </div>
+
+            <div className="absolute bottom-6 w-full flex justify-center">
+              {books && (
+                <Pagination
+                  totalItems={books.length}
+                  itemsPerPage={itemPerPage}
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                />
+              )}
             </div>
           </div>
         </>

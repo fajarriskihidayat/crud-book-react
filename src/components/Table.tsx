@@ -5,11 +5,12 @@ import { IBook } from "../types";
 import { Dispatch, SetStateAction } from "react";
 
 interface TableProps {
-  datas: IBook[];
+  datas: IBook[] | undefined;
+  currentItems: IBook[] | undefined;
   setBooks: Dispatch<SetStateAction<IBook[] | undefined>>;
 }
 
-const Table = ({ datas, setBooks }: TableProps) => {
+const Table = ({ datas, currentItems, setBooks }: TableProps) => {
   const handleDelete = (id: number | undefined) => {
     const books: IBook[] = datas ? datas.filter((data) => data.id !== id) : [];
     localStorage.setItem("books", JSON.stringify(books));
@@ -29,8 +30,8 @@ const Table = ({ datas, setBooks }: TableProps) => {
         </tr>
       </thead>
       <tbody>
-        {datas.length > 0 ? (
-          datas.map((item, i) => (
+        {currentItems && currentItems.length > 0 ? (
+          currentItems.map((item, i) => (
             <tr className="border-b border-gray-300" key={i}>
               <td className="py-4 px-6">{item.nama}</td>
               <td className="py-4 px-6">{item.jenis}</td>
