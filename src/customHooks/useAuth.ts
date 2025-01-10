@@ -24,7 +24,7 @@ export const useAuth = () => {
   const login = (data: IUser) => {
     localStorage.setItem(
       "user",
-      JSON.stringify({ fullName: data.fullName, email: data.username })
+      JSON.stringify({ fullName: data.fullName, username: data.username })
     );
     setIsAuthenticated(true);
     navigate("/");

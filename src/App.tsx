@@ -1,7 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
-import Dashboard from "./pages/Dashboard";
 import PrivateRoutes from "./utils/PrivateRoutes";
+import User from "./pages/Setting";
+import Book from "./pages/Book";
 
 function App() {
   return (
@@ -9,7 +10,8 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<PrivateRoutes />}>
-          <Route path="" element={<Dashboard />} />
+          <Route path="" element={<Book />} />
+          <Route path="/setting" element={<User />} />
         </Route>
       </Routes>
     </div>
