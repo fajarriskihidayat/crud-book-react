@@ -8,15 +8,3 @@ export const MENU = [
     path: "/setting",
   },
 ];
-
-export const MODE = [
-  {
-    name: "OS",
-  },
-  {
-    name: "Light",
-  },
-  {
-    name: "Dark",
-  },
-];

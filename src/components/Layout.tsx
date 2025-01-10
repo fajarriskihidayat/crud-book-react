@@ -10,7 +10,9 @@ const Layout = ({ children }: LayoutProps) => {
     <>
       <Navbar />
 
-      <div>{children}</div>
+      <div className="flex flex-col justify-center mt-10 mx-8 lg:mx-40 gap-3">
+        {children}
+      </div>
     </>
   );
 };
