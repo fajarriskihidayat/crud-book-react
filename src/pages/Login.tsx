@@ -56,6 +56,11 @@ const Login = () => {
   return (
     <div className="flex justify-center items-center h-screen">
       <div className="w-[500px] flex flex-col gap-4 px-4 py-10 sm:p-10  bg-white dark:bg-neutral-800 rounded-lg">
+        <div className="flex justify-between text-black dark:text-white ">
+          <p>username: admin</p>
+          <p>password: admin123</p>
+        </div>
+
         <h1 className="text-2xl font-semibold text-center text-black dark:text-white">
           Login
         </h1>
