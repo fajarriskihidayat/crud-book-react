@@ -6,7 +6,7 @@ import Form from "../components/Form";
 const EditBook = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { books, setBooks } = useOutletContext<IBookOutletContext>();
+  const { books, setBooks, isQuery } = useOutletContext<IBookOutletContext>();
 
   const [data, setData] = useState<IBook>({
     nama: "",
@@ -19,7 +19,9 @@ const EditBook = () => {
   const [error, setError] = useState<string>("");
 
   useEffect(() => {
-    const book = books.find((item) => item.id == id);
+    const booksStorage = localStorage.getItem("books");
+    const datas: IBook[] = booksStorage ? JSON.parse(booksStorage) : [];
+    const book = datas.find((item) => item.id == id);
 
     setData({
       nama: book ? book.nama : "",
@@ -72,7 +74,13 @@ const EditBook = () => {
 
       setBooks(updateBook);
       setIsLoading(false);
-      navigate("/");
+      navigate(
+        isQuery?.keyword
+          ? `/?p=${isQuery?.page}&k=${isQuery?.keyword}`
+          : isQuery?.page === "1"
+          ? "/"
+          : `/?p=${isQuery?.page}`
+      );
     }, 1000);
   };
 

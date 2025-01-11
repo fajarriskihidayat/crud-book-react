@@ -45,7 +45,7 @@ const AddBook = () => {
       }
 
       const newBook: IBook = {
-        id: books.length > 0 ? (books[books.length - 1].id ?? 0) + 1 : 1,
+        id: books.length > 0 ? (books[0].id ?? 0) + 1 : 1,
         nama: data?.nama,
         jenis: data?.jenis,
         tahun: data?.tahun,

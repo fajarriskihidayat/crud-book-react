@@ -8,14 +8,21 @@ interface TableProps {
   datas: IBook[] | undefined;
   currentItems: IBook[] | undefined;
   setBooks: Dispatch<SetStateAction<IBook[] | undefined>>;
+  setFilteredBooks: Dispatch<SetStateAction<IBook[] | undefined>>;
 }
 
-const Table = ({ datas, currentItems, setBooks }: TableProps) => {
+const Table = ({
+  datas,
+  currentItems,
+  setBooks,
+  setFilteredBooks,
+}: TableProps) => {
   const handleDelete = (id: number | undefined) => {
     const books: IBook[] = datas ? datas.filter((data) => data.id !== id) : [];
     localStorage.setItem("books", JSON.stringify(books));
 
     setBooks(books);
+    setFilteredBooks(books);
   };
 
   return (

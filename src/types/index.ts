@@ -11,4 +11,5 @@ export interface IBook {
 export interface IBookOutletContext {
   books: IBook[];
   setBooks: Dispatch<SetStateAction<IBook[] | undefined>>;
+  isQuery?: { page: string; keyword: string };
 }
