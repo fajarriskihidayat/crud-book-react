@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { IoClose, IoMenu } from "react-icons/io5";
-import { NavLink } from "react-router-dom";
-import { MENU } from "../utils/constant";
-import { useAuth } from "../customHooks/useAuth";
 import {
   MdArrowDropDown,
   MdOutlineAccountCircle,
   MdOutlineWbSunny,
 } from "react-icons/md";
-import Button from "./Button";
 import { RiComputerLine, RiMoonFill } from "react-icons/ri";
+import { NavLink } from "react-router-dom";
+import { useAuth } from "../customHooks/useAuth";
+import { MENU } from "../utils/constant";
+import Button from "./Button";
 
 const Navbar = () => {
   const { user, logout } = useAuth();
@@ -179,7 +179,7 @@ const Navbar = () => {
                   onClick={() => setIsOpenDropdown(!isOpenDropdown)}
                 >
                   <MdOutlineAccountCircle color="#000" size={28} />
-                  {user?.fullName ? user.fullName : user?.username}
+                  {user?.fullName}
                   <MdArrowDropDown
                     color="#000"
                     size={28}

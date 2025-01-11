@@ -22,6 +22,7 @@ const Form = ({ data, isLoading, handleChange, handleSubmit }: FormProps) => {
             name="nama"
             value={data?.nama}
             placeholder="Masukkan nama buku"
+            className="w-full"
             onChange={handleChange}
           />
         </div>
@@ -32,6 +33,7 @@ const Form = ({ data, isLoading, handleChange, handleSubmit }: FormProps) => {
             name="jenis"
             value={data?.jenis}
             placeholder="Masukkan jenis buku"
+            className="w-full"
             onChange={handleChange}
           />
         </div>
@@ -42,6 +44,7 @@ const Form = ({ data, isLoading, handleChange, handleSubmit }: FormProps) => {
             name="tahun"
             value={data?.tahun}
             placeholder="Masukkan tahun terbit"
+            className="w-full"
             onChange={handleChange}
           />
         </div>
@@ -52,6 +55,7 @@ const Form = ({ data, isLoading, handleChange, handleSubmit }: FormProps) => {
             name="penerbit"
             value={data?.penerbit}
             placeholder="Masukkan penerbit"
+            className="w-full"
             onChange={handleChange}
           />
         </div>

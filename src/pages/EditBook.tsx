@@ -77,7 +77,7 @@ const EditBook = () => {
       navigate(
         isQuery?.keyword
           ? `/?p=${isQuery?.page}&k=${isQuery?.keyword}`
-          : isQuery?.page === "1"
+          : isQuery?.page == "1" || isQuery?.page == ""
           ? "/"
           : `/?p=${isQuery?.page}`
       );

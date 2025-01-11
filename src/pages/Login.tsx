@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { login, isAuthenticated } = useAuth();
+  const { user, login, isAuthenticated } = useAuth();
   const [data, setData] = useState({
     fullName: "",
     username: "",
@@ -47,7 +47,7 @@ const Login = () => {
         return;
       }
 
-      login(data);
+      login({ ...data, fullName: user ? user.fullName : "Admin" });
 
       setIsLoading(false);
     }, 1000);
@@ -65,6 +65,7 @@ const Login = () => {
               type="text"
               name="username"
               placeholder="Masukkan username"
+              className="w-full"
               onChange={handleChange}
             />
           </div>
@@ -74,6 +75,7 @@ const Login = () => {
               type="password"
               name="password"
               placeholder="Masukkan password"
+              className="w-full"
               onChange={handleChange}
             />
           </div>
