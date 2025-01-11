@@ -88,7 +88,9 @@ const Book = () => {
       {isLocation("/") ? (
         <>
           <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-semibold">Book</h1>
+            <h1 className="text-2xl font-semibold text-black dark:text-white">
+              Book
+            </h1>
             <button
               className="px-2 py-1 bg-green-600 text-white text-sm tracking-wide rounded-md flex items-center gap-1"
               onClick={() => navigate("/create")}
@@ -97,7 +99,7 @@ const Book = () => {
             </button>
           </div>
 
-          <div className="relative w-full h-[400px] bg-neutral-100 p-6 rounded-lg shadow-lg flex flex-col gap-y-5">
+          <div className="relative w-full h-[400px] bg-neutral-100 dark:bg-neutral-800 p-6 rounded-lg shadow-lg flex flex-col gap-y-5">
             <div className="flex justify-end">
               <Search value={queryKeyword} handleSearch={handleSearch} />
             </div>

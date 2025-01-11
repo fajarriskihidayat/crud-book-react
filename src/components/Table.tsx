@@ -29,22 +29,40 @@ const Table = ({
     <table className="w-full">
       <thead>
         <tr>
-          <th className="py-3 px-6 w-[250px] bg-white text-left">Nama</th>
-          <th className="py-3 px-6 w-[250px] bg-white text-left">Jenis</th>
-          <th className="py-3 px-6 w-[250px] bg-white text-left">Tahun</th>
-          <th className="py-3 px-6 w-[250px] bg-white text-left">Penerbit</th>
-          <th className="py-3 px-6 w-[250px] bg-white text-left">Action</th>
+          <th className="py-3 px-6 w-[250px] bg-white dark:bg-black text-black dark:text-white text-left">
+            Nama
+          </th>
+          <th className="py-3 px-6 w-[250px] bg-white dark:bg-black text-black dark:text-white text-left">
+            Jenis
+          </th>
+          <th className="py-3 px-6 w-[250px] bg-white dark:bg-black text-black dark:text-white text-left">
+            Tahun
+          </th>
+          <th className="py-3 px-6 w-[250px] bg-white dark:bg-black text-black dark:text-white text-left">
+            Penerbit
+          </th>
+          <th className="py-3 px-6 w-[250px] bg-white dark:bg-black text-black dark:text-white text-left">
+            Action
+          </th>
         </tr>
       </thead>
       <tbody>
         {currentItems && currentItems.length > 0 ? (
           currentItems.map((item, i) => (
             <tr className="border-b border-gray-300" key={i}>
-              <td className="py-4 px-6">{item.nama}</td>
-              <td className="py-4 px-6">{item.jenis}</td>
-              <td className="py-4 px-6">{item.tahun}</td>
-              <td className="py-4 px-6">{item.penerbit}</td>
-              <td className="py-4 px-6 flex gap-1">
+              <td className="py-4 px-6 text-black dark:text-white">
+                {item.nama}
+              </td>
+              <td className="py-4 px-6 text-black dark:text-white">
+                {item.jenis}
+              </td>
+              <td className="py-4 px-6 text-black dark:text-white">
+                {item.tahun}
+              </td>
+              <td className="py-4 px-6 text-black dark:text-white">
+                {item.penerbit}
+              </td>
+              <td className="py-4 px-6 text-black dark:text-white flex gap-1">
                 <Link
                   to={`/edit/${item.id}`}
                   className="px-2 py-1 bg-yellow-500 text-white text-sm tracking-wide rounded-md flex items-center gap-1"

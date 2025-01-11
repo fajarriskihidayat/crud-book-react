@@ -13,7 +13,7 @@ const Search = ({ value, handleSearch }: SearchProps) => {
         type="text"
         name="search"
         value={value}
-        className="border border-black w-4/12 bg-white"
+        className="border w-6/12 lg:w-4/12"
         placeholder="Masukkan nama buku"
         onChange={(e) => handleSearch(e)}
       />

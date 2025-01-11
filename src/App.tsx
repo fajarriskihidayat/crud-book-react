@@ -8,7 +8,7 @@ import EditBook from "./pages/EditBook";
 
 function App() {
   return (
-    <div className="bg-neutral-50 h-screen">
+    <div className="bg-neutral-50 dark:bg-neutral-900 h-screen">
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<PrivateRoutes />}>

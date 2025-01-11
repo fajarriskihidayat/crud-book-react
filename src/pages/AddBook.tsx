@@ -63,9 +63,11 @@ const AddBook = () => {
 
   return (
     <>
-      <h1 className="text-2xl font-semibold">Create Book</h1>
+      <h1 className="text-2xl font-semibold text-black dark:text-white">
+        Create Book
+      </h1>
 
-      <div className="w-full h-full bg-white p-6 rounded-lg shadow-lg flex flex-col gap-y-5">
+      <div className="w-full h-full bg-white dark:bg-neutral-800 p-6 rounded-lg shadow-lg flex flex-col gap-y-5">
         {error ? <p className="text-red-600">{error}</p> : ""}
         <Form
           isLoading={isLoading}

@@ -42,10 +42,12 @@ const Setting = () => {
   return (
     <Layout>
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-semibold">Setting</h1>
+        <h1 className="text-2xl font-semibold text-black dark:text-white">
+          Setting
+        </h1>
       </div>
 
-      <div className="relative w-full h-[400px] bg-neutral-100 p-6 rounded-lg shadow-lg flex flex-col gap-y-5">
+      <div className="relative w-full h-[400px] bg-neutral-100 dark:bg-neutral-800 p-6 rounded-lg shadow-lg flex flex-col gap-y-5">
         {error ? <p className="text-red-600">{error}</p> : ""}
         <form onSubmit={handleSubmit}>
           <Label>Nama Lengkap</Label>

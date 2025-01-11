@@ -10,26 +10,32 @@ import { NavLink } from "react-router-dom";
 import { useAuth } from "../customHooks/useAuth";
 import { MENU } from "../utils/constant";
 import Button from "./Button";
+import useTheme from "../customHooks/useTheme";
 
 const Navbar = () => {
   const { user, logout } = useAuth();
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);
 
-  const [isMode, setIsMode] = useState("System");
+  const [theme, setTheme] = useTheme();
   const [isModeDropdown, setIsModeDropdown] = useState(false);
+  console.log(theme);
 
   return (
     <nav className="flex flex-col">
-      <div className="px-8 h-[60px] md:px-14 md:h-[70px] flex items-center justify-between bg-white shadow-sm">
+      <div className="px-8 h-[60px] md:px-14 md:h-[70px] flex items-center justify-between bg-white dark:bg-black shadow-sm">
         <NavLink to="/">
-          <div className="text-black text-xl">Dashboard</div>
+          <div className="text-black dark:text-white text-xl">Dashboard</div>
         </NavLink>
         <div
           className="text-3xl md:hidden flex items-center"
           onClick={() => setIsOpenMenu(!isOpenMenu)}
         >
-          {isOpenMenu ? <IoClose color="#000" /> : <IoMenu color="#000" />}
+          {isOpenMenu ? (
+            <IoClose color={theme === "light" ? "#000" : "#fff"} />
+          ) : (
+            <IoMenu color={theme === "light" ? "#000" : "#fff"} />
+          )}
         </div>
 
         <div className="hidden md:flex">
@@ -40,8 +46,8 @@ const Navbar = () => {
                   to={item.path}
                   className={({ isActive }) =>
                     isActive
-                      ? "text-black border-b-2 border-b-black"
-                      : "text-gray-400"
+                      ? "text-black dark:text-white border-b-2 border-b-black dark:border-b-white"
+                      : "text-gray-400 dark:text-neutral-300"
                   }
                 >
                   {item.name}
@@ -50,41 +56,52 @@ const Navbar = () => {
             ))}
             <li className="font-semibold text-md tracking-wide">
               <div
-                className="flex items-center justify-center gap-1 w-24 px-2 py-1 cursor-pointer border border-black rounded-sm"
+                className="flex items-center justify-center gap-1 w-24 px-2 py-1 cursor-pointer border border-black dark:border-white rounded-sm"
                 onClick={() => setIsModeDropdown(!isModeDropdown)}
               >
-                {isMode === "System" ? (
-                  <RiComputerLine size={20} />
-                ) : isMode === "Light" ? (
-                  <MdOutlineWbSunny size={20} />
+                {theme === "light" ? (
+                  <MdOutlineWbSunny
+                    size={20}
+                    color={theme === "light" ? "#000" : "#fff"}
+                  />
+                ) : theme === "dark" ? (
+                  <RiMoonFill
+                    size={20}
+                    color={theme === "dark" ? "#fff" : "#000"}
+                  />
                 ) : (
-                  <RiMoonFill size={20} />
+                  <RiComputerLine
+                    size={20}
+                    color={theme === "system" ? "#fff" : "#000"}
+                  />
                 )}
-                <span>{isMode}</span>
+                <span className="text-black dark:text-white">
+                  {theme.toUpperCase()}
+                </span>
               </div>
               {isModeDropdown && (
                 <div className="bg-white absolute w-32 p-3 rounded-lg shadow-sm z-50 right-44 top-14 text-black">
                   <div className="flex flex-col gap-1 cursor-pointer">
                     <div
                       className="w-full p-2 border border-black flex items-center gap-1 hover:bg-neutral-100"
-                      onClick={() => setIsMode("System")}
-                    >
-                      <RiComputerLine color="#000" size={20} />
-                      <span>System</span>
-                    </div>
-                    <div
-                      className="w-full p-2 border border-black flex items-center gap-1 hover:bg-neutral-100"
-                      onClick={() => setIsMode("Light")}
+                      onClick={() => setTheme("light")}
                     >
                       <MdOutlineWbSunny color="#000" size={20} />
                       <span>Light</span>
                     </div>
                     <div
                       className="w-full p-2 border border-black flex items-center gap-1 hover:bg-neutral-100"
-                      onClick={() => setIsMode("Dark")}
+                      onClick={() => setTheme("dark")}
                     >
                       <RiMoonFill color="#000" size={20} />
                       <span>Dark</span>
+                    </div>
+                    <div
+                      className="w-full p-2 border border-black flex items-center gap-1 hover:bg-neutral-100"
+                      onClick={() => setTheme("system")}
+                    >
+                      <RiComputerLine color="#000" size={20} />
+                      <span>System</span>
                     </div>
                   </div>
                 </div>
@@ -92,12 +109,19 @@ const Navbar = () => {
             </li>
             <li className="font-semibold text-md tracking-wide relative">
               <div
-                className="flex items-center gap-1 text-black cursor-pointer"
+                className="flex items-center gap-1 text-black dark:text-white cursor-pointer"
                 onClick={() => setIsOpenDropdown(!isOpenDropdown)}
               >
-                <MdOutlineAccountCircle color="#000" size={28} />
+                <MdOutlineAccountCircle
+                  color={theme === "light" ? "#000" : "fff"}
+                  size={28}
+                />
                 {user?.fullName ? user.fullName : user?.username}
-                <MdArrowDropDown color="#000" size={28} className="ml-[-6px]" />
+                <MdArrowDropDown
+                  color={theme === "light" ? "#000" : "fff"}
+                  size={28}
+                  className="ml-[-6px]"
+                />
               </div>
               {isOpenDropdown && (
                 <div className="bg-white absolute w-40 p-3 rounded-lg shadow-sm z-50 -right-8 top-8 text-black">
@@ -111,7 +135,7 @@ const Navbar = () => {
 
       <div className="relative">
         <nav
-          className={`md:hidden absolute w-full duration-500 z-[100] bg-white shadow-sm ${
+          className={`md:hidden absolute w-full duration-500 z-[100] bg-white dark:bg-black shadow-sm ${
             isOpenMenu ? "block" : "hidden"
           }`}
         >
@@ -122,8 +146,8 @@ const Navbar = () => {
                   to={item.path}
                   className={({ isActive }) =>
                     isActive
-                      ? "text-black border-b-2 border-b-black"
-                      : "text-neutral-300"
+                      ? "text-black dark:text-white border-b-2 border-b-black dark:border-b-white"
+                      : "text-gray-400 dark:text-neutral-300"
                   }
                 >
                   {item.name}
@@ -133,41 +157,52 @@ const Navbar = () => {
             <div className="flex  gap-4">
               <li className="px-3 py-2 font-bold">
                 <div
-                  className="flex items-center justify-center gap-1 w-24 px-2 py-1 cursor-pointer border border-black rounded-sm"
+                  className="flex items-center justify-center gap-1 w-24 px-2 py-1 cursor-pointer border border-black dark:border-white rounded-sm"
                   onClick={() => setIsModeDropdown(!isModeDropdown)}
                 >
-                  {isMode === "System" ? (
-                    <RiComputerLine size={20} />
-                  ) : isMode === "Light" ? (
-                    <MdOutlineWbSunny size={20} />
+                  {theme === "light" ? (
+                    <MdOutlineWbSunny
+                      size={20}
+                      color={theme === "light" ? "#000" : "#fff"}
+                    />
+                  ) : theme === "dark" ? (
+                    <RiMoonFill
+                      size={20}
+                      color={theme === "dark" ? "#fff" : "#000"}
+                    />
                   ) : (
-                    <RiMoonFill size={20} />
+                    <RiComputerLine
+                      size={20}
+                      color={theme === "light" ? "#000" : "#fff"}
+                    />
                   )}
-                  <span>{isMode}</span>
+                  <span className="text-black dark:text-white">
+                    {theme.toUpperCase()}
+                  </span>
                 </div>
                 {isModeDropdown && (
                   <div className="bg-white absolute w-32 p-3 rounded-lg shadow-sm z-50 left-3 top-33 text-black">
                     <div className="flex flex-col gap-1 cursor-pointer">
                       <div
                         className="w-full p-2 border border-black flex items-center gap-1 hover:bg-neutral-100"
-                        onClick={() => setIsMode("System")}
-                      >
-                        <RiComputerLine color="#000" size={20} />
-                        <span>System</span>
-                      </div>
-                      <div
-                        className="w-full p-2 border border-black flex items-center gap-1 hover:bg-neutral-100"
-                        onClick={() => setIsMode("Light")}
+                        onClick={() => setTheme("light")}
                       >
                         <MdOutlineWbSunny color="#000" size={20} />
                         <span>Light</span>
                       </div>
                       <div
                         className="w-full p-2 border border-black flex items-center gap-1 hover:bg-neutral-100"
-                        onClick={() => setIsMode("Dark")}
+                        onClick={() => setTheme("dark")}
                       >
                         <RiMoonFill color="#000" size={20} />
                         <span>Dark</span>
+                      </div>
+                      <div
+                        className="w-full p-2 border border-black flex items-center gap-1 hover:bg-neutral-100"
+                        onClick={() => setTheme("system")}
+                      >
+                        <RiComputerLine color="#000" size={20} />
+                        <span>System</span>
                       </div>
                     </div>
                   </div>
@@ -175,13 +210,16 @@ const Navbar = () => {
               </li>
               <li className="px-3 py-2 font-bold">
                 <div
-                  className="flex items-center gap-1 text-black cursor-pointer"
+                  className="flex items-center gap-1 text-black dark:text-white cursor-pointer"
                   onClick={() => setIsOpenDropdown(!isOpenDropdown)}
                 >
-                  <MdOutlineAccountCircle color="#000" size={28} />
+                  <MdOutlineAccountCircle
+                    color={theme === "light" ? "#000" : "fff"}
+                    size={28}
+                  />
                   {user?.fullName}
                   <MdArrowDropDown
-                    color="#000"
+                    color={theme === "light" ? "#000" : "fff"}
                     size={28}
                     className="ml-[-6px]"
                   />

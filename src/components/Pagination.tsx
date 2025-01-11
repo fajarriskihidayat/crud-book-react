@@ -22,8 +22,10 @@ const Pagination = ({
       <ul className="inline-flex items-center -space-x-px cursor-pointer">
         {pages.map((page, i) => (
           <li
-            className={`px-3 py-2 leading-tight border border-black ${
-              page == currentPage ? "bg-black text-white" : "text-black"
+            className={`px-3 py-2 leading-tight border border-black dark:border-white ${
+              page == currentPage
+                ? "bg-black dark:bg-white text-white dark:text-black"
+                : "text-black dark:text-white"
             }`}
             key={i}
             onClick={() => setCurrentPage(page)}
